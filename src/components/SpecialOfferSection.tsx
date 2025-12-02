@@ -1,38 +1,47 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, Gift, Shield, Truck } from "lucide-react";
-
 const SpecialOfferSection = () => {
   // Countdown timer - 24 hours from now
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
-    seconds: 59,
+    seconds: 59
   });
-
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
+      setTimeLeft(prev => {
         if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
+          return {
+            ...prev,
+            seconds: prev.seconds - 1
+          };
         } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+          return {
+            ...prev,
+            minutes: prev.minutes - 1,
+            seconds: 59
+          };
         } else if (prev.hours > 0) {
-          return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+          return {
+            hours: prev.hours - 1,
+            minutes: 59,
+            seconds: 59
+          };
         } else {
           // Reset to 24 hours
-          return { hours: 23, minutes: 59, seconds: 59 };
+          return {
+            hours: 23,
+            minutes: 59,
+            seconds: 59
+          };
         }
       });
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
-
   const formatNumber = (num: number) => num.toString().padStart(2, "0");
-
-  return (
-    <section className="py-20 lg:py-28 bg-gradient-hero relative overflow-hidden">
+  return <section className="py-20 lg:py-28 bg-gradient-hero relative overflow-hidden">
       {/* Background glow effects */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[150px]" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[150px]" />
@@ -47,7 +56,7 @@ const SpecialOfferSection = () => {
 
           {/* Headline */}
           <h2 className="font-display text-4xl md:text-5xl lg:text-7xl mb-6">
-            COMBO TRANSFORMAÇÃO
+            COMBOS TRANSFORMAÇÃO
             <br />
             <span className="text-gradient">40% DE DESCONTO</span>
           </h2>
@@ -102,8 +111,6 @@ const SpecialOfferSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default SpecialOfferSection;
