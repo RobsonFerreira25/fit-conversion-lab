@@ -9,8 +9,6 @@ export interface Product {
   name: string;
   description: string;
   image: string;
-  originalPrice: number;
-  salePrice: number;
   rating: number;
   reviews: number;
   badge: string;
@@ -27,8 +25,6 @@ const defaultProducts: Product[] = [
     name: "Whey Protein Isolado",
     description: "30g de proteína por dose. Absorção ultra-rápida para máximo ganho muscular.",
     image: productWhey,
-    originalPrice: 249.90,
-    salePrice: 149.90,
     rating: 4.9,
     reviews: 2847,
     badge: "Mais Vendido",
@@ -40,8 +36,6 @@ const defaultProducts: Product[] = [
     name: "Pré-Treino Extreme",
     description: "Energia explosiva, foco mental e pump muscular intenso por horas.",
     image: productPreworkout,
-    originalPrice: 179.90,
-    salePrice: 109.90,
     rating: 4.8,
     reviews: 1923,
     badge: "Alta Demanda",
@@ -53,8 +47,6 @@ const defaultProducts: Product[] = [
     name: "BCAA Recovery",
     description: "Aminoácidos essenciais para recuperação muscular e redução de fadiga.",
     image: productBcaa,
-    originalPrice: 159.90,
-    salePrice: 99.90,
     rating: 4.7,
     reviews: 1456,
     badge: "Novidade",
@@ -76,13 +68,6 @@ const ProductsSection = ({
   subtitle = "FUNCIONAM",
   description = "Produtos de alta qualidade para atletas que buscam resultados reais."
 }: ProductsSectionProps) => {
-  const calculateDiscount = (original: number, sale: number) => {
-    return Math.round(((original - sale) / original) * 100);
-  };
-
-  const formatPrice = (price: number) => {
-    return price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  };
 
   return (
     <section id="produtos" className="py-20 lg:py-28 bg-background">
@@ -121,12 +106,6 @@ const ProductsSection = ({
                     {product.badge}
                   </span>
                 </div>
-                {/* Discount badge */}
-                <div className="absolute top-4 right-4 bg-destructive px-3 py-1 rounded-full">
-                  <span className="text-xs font-bold text-destructive-foreground">
-                    -{calculateDiscount(product.originalPrice, product.salePrice)}%
-                  </span>
-                </div>
               </div>
 
               {/* Product info */}
@@ -155,16 +134,6 @@ const ProductsSection = ({
                   {product.description}
                 </p>
 
-                {/* Price */}
-                <div className="flex items-baseline gap-3 mb-6">
-                  <span className="text-3xl font-bold text-primary">
-                    {formatPrice(product.salePrice)}
-                  </span>
-                  <span className="text-lg text-muted-foreground line-through">
-                    {formatPrice(product.originalPrice)}
-                  </span>
-                </div>
-
                 {/* CTA */}
                 <Button variant="cta" className="w-full group/btn">
                   <ShoppingCart className="w-5 h-5" />
@@ -180,7 +149,7 @@ const ProductsSection = ({
         <div className="mt-12 text-center">
           <p className="text-muted-foreground">
             <span className="text-accent font-semibold">✓ Frete Grátis</span> para todo Brasil | 
-            <span className="text-accent font-semibold"> ✓ Parcelamento</span> em até 12x | 
+            <span className="text-accent font-semibold"> ✓ Qualidade Premium</span> garantida | 
             <span className="text-accent font-semibold"> ✓ Garantia</span> de 30 dias
           </p>
         </div>

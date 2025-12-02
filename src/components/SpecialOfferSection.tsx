@@ -79,20 +79,6 @@ const SpecialOfferSection = () => {
             </div>
           </div>
 
-          {/* Price anchoring */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
-            <div className="text-center">
-              <p className="text-muted-foreground text-sm mb-1">Valor normal</p>
-              <p className="text-3xl text-muted-foreground line-through">R$ 589,70</p>
-            </div>
-            <div className="hidden sm:block w-px h-16 bg-border" />
-            <div className="text-center">
-              <p className="text-accent text-sm font-semibold mb-1">Seu preço hoje</p>
-              <p className="font-display text-5xl md:text-6xl text-primary">R$ 349,90</p>
-              <p className="text-sm text-muted-foreground">ou 12x de R$ 29,16</p>
-            </div>
-          </div>
-
           {/* CTA */}
           <Button variant="hero" size="xl" className="mb-10 text-2xl px-12 py-8">
             GARANTIR MEU COMBO
