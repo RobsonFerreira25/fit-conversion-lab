@@ -4,7 +4,24 @@ import productWhey from "@/assets/product-whey.jpg";
 import productPreworkout from "@/assets/product-preworkout.jpg";
 import productBcaa from "@/assets/product-bcaa.jpg";
 
-const products = [
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  originalPrice: number;
+  salePrice: number;
+  rating: number;
+  reviews: number;
+  badge: string;
+  badgeColor: string;
+  category?: string;
+  sizes?: string[];
+  colors?: string[];
+  gender?: "masculino" | "feminino" | "unissex";
+}
+
+const defaultProducts: Product[] = [
   {
     id: 1,
     name: "Whey Protein Isolado",
@@ -16,6 +33,7 @@ const products = [
     reviews: 2847,
     badge: "Mais Vendido",
     badgeColor: "bg-primary",
+    category: "Suplementos",
   },
   {
     id: 2,
@@ -28,6 +46,7 @@ const products = [
     reviews: 1923,
     badge: "Alta Demanda",
     badgeColor: "bg-destructive",
+    category: "Suplementos",
   },
   {
     id: 3,
@@ -40,12 +59,29 @@ const products = [
     reviews: 1456,
     badge: "Novidade",
     badgeColor: "bg-accent",
+    category: "Suplementos",
   },
 ];
 
-const ProductsSection = () => {
+interface ProductsSectionProps {
+  products?: Product[];
+  title?: string;
+  subtitle?: string;
+  description?: string;
+}
+
+const ProductsSection = ({ 
+  products = defaultProducts,
+  title = "PRODUTOS QUE",
+  subtitle = "FUNCIONAM",
+  description = "Produtos de alta qualidade para atletas que buscam resultados reais."
+}: ProductsSectionProps) => {
   const calculateDiscount = (original: number, sale: number) => {
     return Math.round(((original - sale) / original) * 100);
+  };
+
+  const formatPrice = (price: number) => {
+    return price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   };
 
   return (
@@ -57,10 +93,10 @@ const ProductsSection = () => {
             Nossos produtos
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-6">
-            SUPLEMENTOS QUE <span className="text-gradient">FUNCIONAM</span>
+            {title} <span className="text-gradient">{subtitle}</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Fórmulas cientificamente desenvolvidas para atletas que buscam resultados reais.
+            {description}
           </p>
         </div>
 
@@ -122,10 +158,10 @@ const ProductsSection = () => {
                 {/* Price */}
                 <div className="flex items-baseline gap-3 mb-6">
                   <span className="text-3xl font-bold text-primary">
-                    R$ {product.salePrice.toFixed(2).replace(".", ",")}
+                    {formatPrice(product.salePrice)}
                   </span>
                   <span className="text-lg text-muted-foreground line-through">
-                    R$ {product.originalPrice.toFixed(2).replace(".", ",")}
+                    {formatPrice(product.originalPrice)}
                   </span>
                 </div>
 
